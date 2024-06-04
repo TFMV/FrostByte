@@ -1,6 +1,6 @@
 polaris:
   host: "localhost"
   port: 5432
-  user: "polaris"
+  user: "postgres"
   password: "polaris"
   dbname: "polaris"
