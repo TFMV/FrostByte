@@ -1,0 +1,6 @@
+polaris:
+  host: "localhost"
+  port: 5432
+  user: "polaris"
+  password: "polaris"
+  dbname: "polaris"

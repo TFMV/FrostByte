@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  spark:
+    image: bitnami/spark:3.1.2
+    container_name: spark
+    environment:
+      - SPARK_MODE=master
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+
+  iceberg:
+    image: apache/iceberg:latest
+    container_name: iceberg
+    volumes:
+      - ./data/iceberg:/var/lib/iceberg
+
+  polaris:
+    image: polarisdb/polaris:latest
+    container_name: polaris
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=polaris
+      - POSTGRES_PASSWORD=polaris
+      - POSTGRES_DB=polaris
+    volumes:
+      - ./data/polaris:/var/lib/postgresql/data
+
+  setup:
+    image: bitnami/spark:3.1.2
+    container_name: setup
+    depends_on:
+      - spark
+      - iceberg
+      - polaris
+    volumes:
+      - ./scripts/setup.sh:/scripts/setup.sh
+    entrypoint: ["/bin/bash", "/scripts/setup.sh"]
