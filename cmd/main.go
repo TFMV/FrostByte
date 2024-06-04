@@ -14,7 +14,7 @@ import (
 func main() {
 	utils.InitLogger()
 
-	config, err := utils.LoadConfig("config/config.yaml")
+	config, err := utils.LoadConfig("/Users/thomasmcgeehan/FrostByte/FrostByte/config/config.yaml")
 	if err != nil {
 		log.Fatalf("Failed to load config: %v", err)
 	}
